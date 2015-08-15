@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<title>Welcome to Maker Party</title>
+    	<style type="text/css">
+    	    body{
+    	    	background:silver;
+    	    	font-family: "Times New Roman",Times,serif,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    	    	width:100%;
+    	    }
+    	    div{
+    	    	margin:1%;
+    	    }
+    	    form{
+    	    	//border:1px solid black;
+    	    }
+    	    form input{
+    	    	margin:.4%;
+    	    }
+    	</style>
+    	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    </head>
+    <body>
+    	<div>
+    	    <center>
+    	        <h1>Welcome to maker party</h1>
+    	        <form action="http://localhost:3100/login" method="post">
+    	            <label>Username:<input type="text" name="user[name]" id="username" autocomplete="off" required/></label><br>
+    	            <label>Password:<input type="password" name="user[password]" id="password" required></label><br>
+    	            <input type="submit" id="submit" value="submit">
+    	       </form>
+    	    </center>
+    	    
+    	</div>
+    </body>
+</html>

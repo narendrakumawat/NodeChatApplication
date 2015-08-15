@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+    <title>What's in your mind</title>
+    <!--<script src="jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>-->
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    
+
+    <style>
+      html{
+        width:100%;
+        height:100%;
+      }
+      body{
+            background:silver;
+            font-family: "Times New Roman",Times,serif,"Helvetica Neue",Helvetica,Arial,sans-serif;
+            width:100%;
+            height:100%;
+            color:black;
+            overflow:hidden;
+            font-size:1em;
+          }
+      #greetings{
+        width:95%;
+        text-align:center;
+        position:absolute;
+        top:0;
+        font-size:1.4em;
+      }
+      #messages{
+        position:absolute;
+        top:5%;
+        //left:0;
+        width:95%;
+        height:80%;
+        overflow-Y:scroll;
+        //background-color:skyblue;
+      }
+      #messages li:nth-child(even){
+        color:darkgreen;
+      }
+      #myform{
+        background:#ccc;
+        position:fixed;
+        left:1%;
+        top:85%;
+        height:10%;
+        width:95%;
+      }
+      form textarea{
+        width:85%;
+      }
+      form input{
+        width:85%;
+      }
+      @media only screen and (max-width:500px){
+        body{
+          font-size:.9em;
+        }
+      }
+      @media only screen and (max-width:350px){
+        body{
+          font-size:.8em;
+        }
+      }
+      @media only screen and (max-width:300px){
+        body{
+          font-size:.75em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="greetings"></div>
+    <ul id="messages"></ul>
+    <form action="" id="myform">
+      Say something:
+      <!--<textarea id="m" autocomplete="off"></textarea>-->
+      <input type="text" id="m" autocomplete="off" required/>
+      <button>Send</button>
+    </form>
+    <script>
+        var server_socket_id;
+        var username;
+        var socket = io();
+        $('form').submit(function(){
+            $('#messages').append($('<li>').text('You :'+$('#m').val()));
+            socket.emit('chat message', username+": "+$('#m').val());
+            console.log($('#m').val());
+            $('#m').val('');
+            return false;
+        });
+        socket.on('server_socket_id',function(data){
+            server_socket_id=data.socket_id;
+            console.log(server_socket_id);
+        });
+        socket.on('username',function(data){
+            username=data;
+            $('#greetings').text("Hi "+username);
+            console.log(username);
+        });
+        socket.on('chat message', function(msg){
+            $('#messages').append($('<li>').text(msg));
+        });
+        socket.on('user_connected',function(msg){
+
+            $('#messages').append($('<li>').text(msg));
+        });
+        socket.on('user_disconnected',function(msg){
+            //msg=username+" "+msg;
+            $('#messages').append($('<li>').text(msg+" disconnected"));
+            console.log("user disconnected");
+        });
+        
+    </script>
+  </body>
+</html>
