@@ -22,7 +22,7 @@ app.post('/login',function(req,res){
 
 app.get('/instant_chat', function (req, res) {
 	
-    res.send('<p>Please login first</p>')
+    res.send('<p>Please login first</p><br><p><a href="http://localhost:3100">login</a></p>')
 });
 
 app.post('/instant_chat', function (req, res) {
@@ -51,7 +51,7 @@ function login(req,res){
         res.end();
     }
     else {
-        res.send('Bad user/pass');
+        res.send('<p>Bad user/password</p><p><a href="http://localhost:3100">login</a></p>');
     } 
 }
 
