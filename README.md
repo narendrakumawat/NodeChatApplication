@@ -12,7 +12,7 @@ Building NodeChatApplication
     nodemon index.js
 
 
- See the working demo at <http://188.166.84.159:3100/> password is <makerparty>. Share this address to your friend and start chatting.
+ See the working demo at <http://188.166.84.159:3100/> password is 'makerparty'. Share this address to your friend and start chatting.
 
     
 
